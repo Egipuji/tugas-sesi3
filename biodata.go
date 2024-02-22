@@ -14,15 +14,19 @@ type Biodata struct {
 }
 
 func findData(id string, data map[string]Biodata) (Biodata, error) {
+	//melakukan perulang untuk mencari apakah ada key yg sama dengan id
 	for key, value := range data {
 		if key == id {
+			//mereturn value dari key yang sama dan return error menjadi nil
 			return value, nil
 		}
 	}
+	//bila key tidak ditemukan mereturn value kosong/ struct kosong dan error message
 	return Biodata{}, errors.New("data siswa tidak ada")
 }
 
 func main() {
+	//mendapatkan argumen dari terminal
 	args := os.Args[1:]
 
 	siswaMap := map[string]Biodata{
@@ -34,6 +38,7 @@ func main() {
 
 	data, err := findData(args[0], siswaMap)
 
+	//cek apakah ada error
 	if err != nil {
 		panic(err)
 	}
